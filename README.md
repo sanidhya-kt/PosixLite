@@ -1,33 +1,105 @@
 # PosixLite
 
-A lightweight POSIX-compliant operating system environment designed to provide essential UNIX-like functionalities with minimal overhead. PosixLite aims to offer a clean, modular, and educational implementation of core POSIX concepts, making it suitable for learning, experimentation, and systems programming research.
+<div align="center">
+
+### A Unix-like Interactive Shell Built in C++ Using POSIX System Calls
+
+Lightweight command-line shell supporting process management, pipelines, I/O redirection, background execution, and built-in commands.
+
+![Language](https://img.shields.io/badge/Language-C%2B%2B-blue)
+![Platform](https://img.shields.io/badge/Platform-Linux-green)
+![POSIX](https://img.shields.io/badge/Standard-POSIX-orange)
+![License](https://img.shields.io/badge/License-MIT-yellow)
+
+</div>
 
 ---
 
 ## Overview
 
-PosixLite is a compact implementation of fundamental POSIX features, including process management, file handling, memory management, and system utilities. The project focuses on simplicity, portability, and maintainability while preserving key operating system principles.
+PosixLite is a Unix-like interactive shell developed in C++ that demonstrates core operating system and systems programming concepts through direct use of POSIX system calls.
 
-### Key Objectives
+The project replicates essential shell functionalities found in traditional Unix shells, including command execution, process creation, inter-process communication, input/output redirection, and background job management.
 
-* Provide a lightweight POSIX-like environment.
-* Demonstrate core operating system concepts.
-* Serve as a learning platform for systems programming.
-* Enable experimentation with kernel and user-space components.
-* Maintain a modular and extensible architecture.
+It serves as both a practical systems programming project and an educational tool for understanding how modern command-line interpreters interact with the operating system.
 
 ---
 
 ## Features
 
-* Process creation and management
-* Basic scheduling mechanisms
-* File system operations
-* Memory management utilities
-* POSIX-style system calls
-* Command-line interface
-* Modular architecture for easy extension
-* Educational and research-friendly design
+### Command Execution
+
+* Execute external Linux commands
+* Support for command arguments
+* Process creation using `fork()`
+* Program execution using `execvp()`
+
+### Pipelines
+
+* Multi-stage command pipelines using `pipe()`
+* Inter-process communication between commands
+
+Example:
+
+```bash
+ls -la | grep ".cpp" | wc -l
+```
+
+### I/O Redirection
+
+* Input redirection (`<`)
+* Output redirection (`>`)
+* Append output redirection (`>>`)
+
+Examples:
+
+```bash
+cat < input.txt
+ls > output.txt
+echo "Hello" >> log.txt
+```
+
+### Background Job Execution
+
+* Run commands asynchronously using `&`
+* Non-blocking process execution
+
+Example:
+
+```bash
+sleep 10 &
+```
+
+### Built-in Commands
+
+* `cd`
+* `pwd`
+* `exit`
+* Additional shell utilities
+
+### Process Management
+
+* Child process creation
+* Parent-child synchronization
+* Process termination handling
+* Exit status tracking
+
+---
+
+## System Calls Used
+
+The shell is implemented using fundamental POSIX system calls:
+
+| System Call            | Purpose                     |
+| ---------------------- | --------------------------- |
+| `fork()`               | Create child processes      |
+| `execvp()`             | Execute programs            |
+| `wait()` / `waitpid()` | Process synchronization     |
+| `pipe()`               | Inter-process communication |
+| `dup2()`               | File descriptor redirection |
+| `open()`               | File handling               |
+| `close()`              | File descriptor management  |
+| `chdir()`              | Directory navigation        |
 
 ---
 
@@ -35,41 +107,44 @@ PosixLite is a compact implementation of fundamental POSIX features, including p
 
 ```text
 PosixLite/
-├── src/                # Source code
-├── include/            # Header files
-├── docs/               # Documentation
-├── tests/              # Test cases
-├── scripts/            # Utility scripts
-├── examples/           # Example programs
-└── README.md
+│
+├── src/                 # Source files
+├── include/             # Header files
+├── README.md
+├── LICENSE
+└── Makefile
 ```
 
 ---
 
-## Getting Started
+## Installation
 
 ### Prerequisites
 
-* GCC / Clang
-* Make
-* Linux, macOS, or POSIX-compatible environment
+* Linux Operating System
+* GCC/G++ Compiler
+* POSIX-compliant environment
 
-### Installation
-
-Clone the repository:
+### Clone Repository
 
 ```bash
 git clone https://github.com/sanidhya-kt/PosixLite.git
 cd PosixLite
 ```
 
-Build the project:
+### Build
+
+```bash
+g++ *.cpp -o posixlite
+```
+
+or
 
 ```bash
 make
 ```
 
-Run:
+### Run
 
 ```bash
 ./posixlite
@@ -77,70 +152,66 @@ Run:
 
 ---
 
-## Usage
+## Example Usage
 
-Example:
-
-```bash
-./posixlite [options]
-```
-
-For available commands and options, refer to the project documentation.
-
----
-
-## Architecture
-
-PosixLite follows a modular design consisting of:
-
-1. System Call Interface
-2. Process Management Layer
-3. Memory Management Layer
-4. File System Layer
-5. User-Space Utilities
-
-This separation improves maintainability and enables independent development of components.
-
----
-
-## Testing
-
-Run the test suite:
+### Basic Command
 
 ```bash
-make test
+posixlite> ls
 ```
 
-Testing includes validation of system calls, process operations, file handling, and utility functions.
+### Pipeline
+
+```bash
+posixlite> ps aux | grep chrome
+```
+
+### Output Redirection
+
+```bash
+posixlite> ls > files.txt
+```
+
+### Background Process
+
+```bash
+posixlite> sleep 30 &
+```
 
 ---
 
-## Future Enhancements
+## Learning Outcomes
 
-* Advanced scheduling algorithms
-* Improved virtual memory support
-* Networking subsystem
-* Shell enhancements
-* Additional POSIX utilities
-* Performance optimizations
+This project demonstrates practical understanding of:
+
+* Operating Systems
+* Linux Internals
+* Process Management
+* POSIX APIs
+* Inter-Process Communication (IPC)
+* File Descriptors
+* Concurrent Execution
+* Shell Design and Implementation
 
 ---
 
-## Contributing
+## Future Improvements
 
-Contributions are welcome.
-
-1. Fork the repository
-2. Create a feature branch
-3. Commit your changes
-4. Push the branch
-5. Open a Pull Request
+* Command history support
+* Signal handling (`Ctrl+C`, `Ctrl+Z`)
+* Job control commands (`jobs`, `fg`, `bg`)
+* Auto-completion
+* Environment variable expansion
+* Shell scripting support
+* Command aliases
 
 ---
 
 ## License
 
-This project is licensed under the MIT License. See the LICENSE file for details.
+This project is licensed under the MIT License.
+
+See the LICENSE file for more information.
 
 ---
 
@@ -148,10 +219,12 @@ This project is licensed under the MIT License. See the LICENSE file for details
 
 **Sanidhya Kumar Tiwari**
 
+M.Tech – Computer Science & Engineering
+
 GitHub: https://github.com/sanidhya-kt
 
 ---
 
 ## Acknowledgments
 
-This project draws inspiration from UNIX operating systems, POSIX standards, and open-source systems programming communities.
+Inspired by Unix/Linux shell architecture and POSIX standards. Developed as a systems programming project to explore process management, operating system concepts, and command-line interpreter design.
