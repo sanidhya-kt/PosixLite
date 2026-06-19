@@ -1,4 +1,4 @@
-# 🖥️ msh - Mini Unix Shell
+# 🖥️ PosixLite
 
 A lightweight, robust, and feature-rich Unix shell implemented in C++ (C++17). `msh` replicates key capabilities of standard POSIX shells like Bash, including command piping, input/output redirection, interactive job control (foreground/background execution), history management, and a clean, colorized path-shortening prompt.
 
@@ -130,3 +130,5 @@ Hello World
 ## 📄 License
 
 This project is licensed under the terms of the [LICENSE](file:///Users/sanidhyakumartiwari/Desktop/Unix%20Shell%20/LICENSE) file included in this repository.
+
+Created By - SANIDHYA KUMAR TIWARI
