@@ -2,11 +2,16 @@
 CXX      = c++
 CXXFLAGS = -std=c++17 -Wall -Wextra -O2
 TARGET   = msh
+SRCS     = tokenizer.cpp parser.cpp jobs.cpp builtins.cpp executor.cpp main.cpp
+OBJS     = $(SRCS:.cpp=.o)
 
-$(TARGET): shell.cpp
-	$(CXX) $(CXXFLAGS) -o $(TARGET) shell.cpp
+$(TARGET): $(OBJS)
+	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJS)
+
+%.o: %.cpp shell.h
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(TARGET)
+	rm -f $(TARGET) $(OBJS)
 
 .PHONY: clean
